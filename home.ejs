@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+</head>
+<body>
+  <h1>Gebruiker maken</h1>
+  <form action="/create" method="POST">
+    <input type="text" name="name" placeholder="Naam" required>
+    <button type="submit">Maak gebruiker</button>
+  </form>
+
+  <h1>Inloggen als</h1>
+  <ul>
+    <% users.forEach(function(u) { %>
+      <li>
+        <%= u.name %>
+        <form action="/login/<%= u.id %>" method="POST" style="display:inline">
+          <button type="submit">Inloggen</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+
+  <script>
+    const es = new EventSource('/events');
+    es.onmessage = () => location.reload();
+  </script>
+</body>
+</html>

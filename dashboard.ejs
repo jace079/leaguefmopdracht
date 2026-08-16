@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title><%= user.name %></title>
+</head>
+<body>
+  <h1>Welkom, <%= user.name %></h1>
+
+  <form action="/update-name" method="POST">
+    <input type="text" name="name" placeholder="Nieuwe naam" required>
+    <button type="submit">Naam aanpassen</button>
+  </form>
+
+  <form action="/logout" method="POST">
+    <button type="submit">Uitloggen</button>
+  </form>
+
+  <script>
+    const es = new EventSource('/events');
+    es.onmessage = () => location.reload();
+  </script>
+</body>
+</html>
